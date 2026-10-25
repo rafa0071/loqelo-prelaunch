@@ -331,6 +331,7 @@ const DEMO_TEXT = {
   cs: { best: "Nejlepší cena", s: [["garden", "Ostříhat 20 m živého plotu tento týden", "Stříhání živého plotu"], ["home", "Opravit kapající kuchyňský kohoutek", "Instalatérství"], ["office", "Týdenní úklid, kancelář 120 m²", "Úklid kanceláře"]], label: "3 nabídky: \"{x}\"", wait: "Hledáme poskytovatele poblíž…" }
 };
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const RECORDING = new URLSearchParams(location.search).has("rec"); // fixed timings for screen recordings
 let demoRun = 0;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -371,7 +372,7 @@ async function playDemo() {
     const search = $("#demo-search"), typed = $("#demo-typed");
     search.classList.add("typing");
     typed.textContent = "";
-    for (const ch of q) { typed.textContent += ch; await sleep(45 + Math.random() * 40); if (!alive()) return; }
+    for (const ch of q) { typed.textContent += ch; await sleep(RECORDING ? 60 : 45 + Math.random() * 40); if (!alive()) return; }
     await sleep(350); if (!alive()) return;
     search.classList.remove("typing");
     $("#demo-label").textContent = tx.wait;
@@ -496,7 +497,7 @@ const start = I18N[initial] ? initial : detectLang();
 $("#lang").value = start;
 applyLang(start);
 setInterval(renderCountdown, 30000);
-if (!store.get("loqelo.consent") && !new URLSearchParams(location.search).has("shot")) $("#cookie").hidden = false;
+if (!store.get("loqelo.consent") && !new URLSearchParams(location.search).has("shot") && !RECORDING) $("#cookie").hidden = false;
 </script>
 </body>
 </html>
