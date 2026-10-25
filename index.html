@@ -4,264 +4,316 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Loqelo · Everything your place needs</title>
-<meta name="description" content="Loqelo connects you with trusted providers for your home, garden and office. Join the waitlist before the February 2027 launch.">
+<meta name="description" content="Loqelo connects you with trusted providers for your home, garden and office. Describe what you need, compare offers, choose the best one. Join the waitlist before the February 2027 launch.">
 <meta property="og:title" content="Loqelo · Everything your place needs">
-<meta property="og:description" content="Describe what you need, get offers from verified local providers, choose the best one. Launching February 2027.">
+<meta property="og:description" content="Describe what you need, get offers from verified providers, choose the best one. Launching February 2027.">
+<meta property="og:image" content="assets/app-home.png">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
-/* Layout: sticky nav; hero with phone mock; video; how-it-works steps; dual waitlist; launch band; footer */
+/* Loqelo brand tokens (from the supplied UI kit) */
 :root {
-  --bg: #f6f5f0;
-  --paper: #ffffff;
-  --ink: #0f241c;
-  --muted: #5a6b63;
-  --line: #e3e2da;
-  --green: #138a5e;
-  --green-deep: #0b4d36;
-  --mint: #dff3ea;
-  --sun: #ffc94d;
-  --f-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
-  --f-body: "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
+  --ink: #0C2229; --ink2: #3D5259; --mute: #76898E; --faint: #A7B5B8;
+  --line: #E4EAE9; --line2: #EEF2F1; --bg: #F4F7F6; --card: #FFFFFF;
+  --teal: #077E88; --teal-d: #05626A; --teal-50: #E7F3F3; --teal-100: #CFE7E7;
+  --mint: #65C8A6; --mint-50: #E9F7F1; --mint-100: #CDEEDF; --mint-d: #2E9A77;
+  --deep: #031C26; --amber: #E8912C; --amber-50: #FDF1E2; --blue: #0677BA; --blue-50: #E6F1F8; --red: #D2544B;
+  --r-s: 10px; --r-m: 14px; --r-l: 20px; --r-xl: 28px;
+  --sh-1: 0 1px 2px rgba(12,34,41,.06), 0 1px 1px rgba(12,34,41,.04);
+  --sh-2: 0 12px 32px -12px rgba(12,34,41,.18), 0 2px 6px rgba(12,34,41,.05);
+  --sh-3: 0 30px 60px -20px rgba(3,28,38,.28), 0 6px 16px rgba(3,28,38,.08);
+  --fd: "Outfit", system-ui, sans-serif;
+  --ft: "DM Sans", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; }
 [hidden] { display: none !important; }
-body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; overflow-x: clip; }
+body { background: var(--bg); color: var(--ink); font-family: var(--ft); font-size: 16px; line-height: 1.6; overflow-x: clip; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
-.wrap { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+.sr { position: absolute; left: -9999px; }
 
 /* Nav */
-nav.top { position: sticky; top: 0; z-index: 20; background: rgba(246,245,240,.9); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+nav.top { position: sticky; top: 0; z-index: 20; background: rgba(244,247,246,.88); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .2s; }
 nav.top.scrolled { border-color: var(--line); }
 nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
-.logo { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; text-decoration: none; }
-.logo-mark { width: 34px; height: 34px; border-radius: 11px; background: var(--green); position: relative; }
-.logo-mark::before { content: ""; position: absolute; inset: 9px 9px 7px; border: 3px solid #fff; border-top-color: transparent; border-radius: 0 0 8px 8px; }
-.logo-mark::after { content: ""; position: absolute; width: 8px; height: 8px; background: var(--sun); border-radius: 50%; top: 6px; left: 13px; }
+.brand img { height: 34px; width: auto; }
 .nav-right { display: flex; align-items: center; gap: 10px; }
-.lang select { font: 600 14px var(--f-body); border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 8px 12px; color: var(--ink); }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 14px 24px; font: 600 16px var(--f-body); cursor: pointer; text-decoration: none; background: var(--ink); color: #fff; transition: transform .15s; }
-.btn:hover { transform: translateY(-1px); }
-.btn.green { background: var(--green); }
-.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.lang select { font: 600 14px var(--ft); border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 9px 12px; color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 15px 26px; font: 600 16px var(--ft); cursor: pointer; text-decoration: none; background: var(--teal); color: #fff; transition: transform .15s, background .15s, box-shadow .15s; box-shadow: 0 10px 24px -10px rgba(7,126,136,.6); }
+.btn:hover { transform: translateY(-1px); background: var(--teal-d); }
+.btn.dark { background: var(--ink); box-shadow: none; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; }
+.btn.ghost:hover { background: var(--card); }
 .btn.sm { padding: 10px 18px; font-size: 14px; }
 
 /* Hero */
-.hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-block: 56px 72px; }
-.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--mint); color: var(--green-deep); font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px; }
-.badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.8s infinite; }
-@keyframes pulse { 50% { opacity: .3; } }
-h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(42px, 6.4vw, 78px); line-height: .98; letter-spacing: -.035em; margin: 18px 0 20px; text-wrap: balance; }
-h1 em { font-style: normal; color: var(--green); }
-.lead { font-size: 19px; color: var(--muted); max-width: 48ch; margin: 0 0 30px; }
-.cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.trust { display: flex; gap: 22px; margin-top: 34px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
-.trust span::before { content: "✓"; color: var(--green); font-weight: 700; margin-right: 6px; }
-
-/* Phone mock */
+.hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-block: 48px 72px; }
 .hero > * { min-width: 0; }
-.stage { position: relative; display: grid; place-items: center; min-height: 540px; }
-.blob { position: absolute; width: min(440px, 88vw); height: min(440px, 88vw); border-radius: 46% 54% 52% 48% / 50% 44% 56% 50%; background: var(--mint); animation: morph 14s ease-in-out infinite; }
-.sun { position: absolute; width: 90px; height: 90px; border-radius: 50%; background: var(--sun); top: 30px; right: 40px; animation: bob 7s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(255,201,77,.5); }
-.phone { position: relative; width: 270px; height: 540px; background: var(--ink); border-radius: 42px; padding: 12px; box-shadow: 0 40px 80px rgba(15,36,28,.25); transform: rotate(-4deg); animation: float 6s ease-in-out infinite; }
-.screen { background: #fff; border-radius: 32px; height: 100%; overflow: hidden; padding: 22px 16px; display: flex; flex-direction: column; gap: 12px; }
-.screen .hi { font-size: 12px; color: var(--muted); min-height: 18px; }
-.screen h4 { margin: 0; font-family: var(--f-display); font-size: 20px; line-height: 1.15; }
-.search { background: var(--bg); border-radius: 14px; padding: 12px; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; border: 1.5px solid transparent; transition: border-color .3s; }
-.search.typing { border-color: var(--green); }
-.search .ico { color: var(--muted); }
-.caret { width: 2px; height: 15px; background: var(--green); animation: blink 1s steps(1) infinite; flex: none; }
-.cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.cat { background: var(--bg); border-radius: 14px; padding: 10px 6px; text-align: center; font-size: 11px; font-weight: 600; transition: background .35s, color .35s, transform .35s; }
-.cat b { display: block; font-size: 20px; }
-.cat.on { background: var(--green); color: #fff; transform: translateY(-2px); }
-.offers { display: flex; flex-direction: column; gap: 10px; }
-.offer { border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; grid-template-columns: 36px 1fr auto; gap: 10px; align-items: center; font-size: 12px; position: relative; opacity: 0; transform: translateY(14px) scale(.97); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.9,.3,1.2), border-color .3s, box-shadow .3s; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--mint-50); color: var(--mint-d); font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px; }
+.badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: pulse 1.8s infinite; }
+h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(44px, 6.4vw, 80px); line-height: 1; letter-spacing: -.03em; margin: 18px 0 20px; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--teal); }
+.lead { font-size: 19px; color: var(--ink2); max-width: 48ch; margin: 0 0 30px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.trust { display: flex; gap: 22px; margin-top: 32px; flex-wrap: wrap; color: var(--mute); font-size: 14px; }
+.trust span::before { content: "✓"; color: var(--mint-d); font-weight: 700; margin-right: 6px; }
+.hero-copy > * { animation: rise .7s ease both; }
+.hero-copy > :nth-child(2) { animation-delay: .08s; } .hero-copy > :nth-child(3) { animation-delay: .16s; }
+.hero-copy > :nth-child(4) { animation-delay: .24s; } .hero-copy > :nth-child(5) { animation-delay: .32s; }
+
+/* Animated phone */
+.stage { position: relative; display: grid; place-items: center; min-height: 580px; }
+.halo { position: absolute; width: min(460px, 88vw); height: min(460px, 88vw); border-radius: 46% 54% 52% 48% / 50% 44% 56% 50%; background: radial-gradient(circle at 30% 30%, var(--mint-100), var(--teal-50) 70%); animation: morph 14s ease-in-out infinite; }
+.ring { position: absolute; width: 120px; height: 120px; border-radius: 50%; border: 14px solid var(--mint); opacity: .35; top: 20px; right: 30px; animation: bob 7s ease-in-out infinite; }
+.phone { position: relative; width: 280px; height: 572px; background: var(--deep); border-radius: 44px; padding: 11px; box-shadow: var(--sh-3); animation: float 6s ease-in-out infinite; }
+.screen { background: var(--bg); border-radius: 34px; height: 100%; overflow: hidden; padding: 18px 14px; display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
+.app-top { display: flex; align-items: center; justify-content: space-between; }
+.app-top img { height: 20px; width: auto; }
+.app-top span { background: var(--ink); color: #fff; font-weight: 600; font-size: 10px; padding: 4px 10px; border-radius: 999px; }
+.app-h { font-family: var(--fd); font-weight: 700; font-size: 21px; line-height: 1.05; letter-spacing: -.02em; margin: 2px 0 0; }
+.app-h b { color: var(--teal); font-weight: 700; display: block; }
+.req { background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--sh-1); overflow: hidden; }
+.req-in { padding: 10px 12px; min-height: 62px; }
+.req-in small { color: var(--mute); font-size: 10px; display: block; margin-bottom: 2px; }
+.req-in p { margin: 0; font-size: 13px; line-height: 1.35; color: var(--ink); }
+.caret { display: inline-block; width: 1.5px; height: 13px; background: var(--teal); vertical-align: -2px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+.found { background: #F6FAF9; border-top: 1px solid var(--line2); padding: 8px 12px 10px; display: none; }
+.found.show { display: block; }
+.found small { color: var(--mint-d); font-weight: 600; font-size: 10.5px; display: block; margin-bottom: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--mint-100); background: var(--mint-50); border-radius: 999px; padding: 2px 9px 2px 3px; font-size: 10.5px; font-weight: 500; opacity: 0; transform: scale(.7); transition: opacity .3s, transform .35s cubic-bezier(.2,.9,.3,1.4); }
+.chip.in { opacity: 1; transform: none; }
+.chip i { width: 15px; height: 15px; border-radius: 50%; display: inline-block; }
+.quotes-h { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--mute); min-height: 16px; }
+.quotes-h b { color: var(--ink); font-family: var(--fd); font-size: 13px; }
+.offers { display: flex; flex-direction: column; gap: 7px; }
+.offer { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 8px 10px; display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; align-items: center; opacity: 0; transform: translateY(12px) scale(.97); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.9,.3,1.2), border-color .3s, box-shadow .3s; }
 .offer.in { opacity: 1; transform: none; }
-.offer.out { opacity: 0; transform: translateX(-20px); }
-.offer.best { border-color: var(--green); box-shadow: 0 6px 18px rgba(19,138,94,.18); }
-.offer .tag { position: absolute; top: -9px; right: 12px; background: var(--sun); color: var(--ink); font-size: 10px; font-weight: 700; padding: 1px 8px; border-radius: 999px; opacity: 0; transform: scale(.6); transition: opacity .3s, transform .3s cubic-bezier(.2,.9,.3,1.4); }
-.offer.best .tag { opacity: 1; transform: none; }
-.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; font-weight: 700; color: var(--green-deep); }
-.offer strong { display: block; font-size: 13px; }
-.offer .price { font-weight: 700; color: var(--green); }
-.float-card { position: absolute; background: var(--paper); border-radius: 16px; padding: 10px 14px; box-shadow: 0 18px 40px rgba(15,36,28,.14); font-size: 12px; line-height: 1.35; display: flex; gap: 10px; align-items: center; max-width: 190px; animation: pop .7s cubic-bezier(.2,.9,.3,1.3) both, bob 5s ease-in-out infinite; }
-.float-card b { font-family: var(--f-display); font-size: 17px; display: block; }
-.fc1 { left: -46px; bottom: 26px; animation-delay: .9s, 1.6s; }
-.fc2 { right: -46px; top: 64px; animation-delay: .6s, 0s; }
-.dot { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; flex: none; }
-@keyframes float { 0%, 100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(-3deg) translateY(-12px); } }
+.offer.out { opacity: 0; transform: translateX(-18px); }
+.offer.best { border-color: var(--teal); box-shadow: 0 8px 20px -8px rgba(7,126,136,.45); }
+.av { width: 30px; height: 30px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 10.5px; }
+.offer strong { display: block; font-size: 11.5px; line-height: 1.2; }
+.tag { display: inline-block; margin-top: 3px; font-size: 9px; font-weight: 700; padding: 1px 7px; border-radius: 6px; }
+.tag.match { background: var(--mint-50); color: var(--mint-d); }
+.tag.price { background: var(--amber-50); color: #A35E12; }
+.tag.fast { background: var(--blue-50); color: var(--blue); }
+.offer .pr { text-align: right; font-family: var(--fd); font-weight: 700; font-size: 15px; line-height: 1.1; }
+.offer .pr small { display: block; font-family: var(--ft); font-weight: 400; font-size: 9.5px; color: var(--mute); }
+.float-card { position: absolute; background: var(--card); border-radius: 16px; padding: 10px 14px; box-shadow: var(--sh-2); font-size: 12px; line-height: 1.35; display: flex; gap: 10px; align-items: center; max-width: 200px; animation: pop .7s cubic-bezier(.2,.9,.3,1.3) both, bob 5s ease-in-out infinite; }
+.float-card b { font-family: var(--fd); font-size: 18px; display: block; }
+.dot { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; flex: none; }
+.fc1 { left: -56px; bottom: -4px; animation-delay: .9s, 1.6s; }
+.fc2 { right: -40px; top: 70px; animation-delay: .6s, 0s; }
+
+@keyframes float { 0%, 100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(-2deg) translateY(-12px); } }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 @keyframes pop { from { opacity: 0; scale: .7; } to { opacity: 1; scale: 1; } }
 @keyframes morph { 0%, 100% { border-radius: 46% 54% 52% 48% / 50% 44% 56% 50%; rotate: 0deg; } 50% { border-radius: 55% 45% 42% 58% / 44% 56% 48% 52%; rotate: 12deg; } }
 @keyframes blink { 50% { opacity: 0; } }
+@keyframes pulse { 50% { opacity: .3; } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.hero > div:first-child > * { animation: rise .7s ease both; }
-.hero > div:first-child > :nth-child(2) { animation-delay: .08s; }
-.hero > div:first-child > :nth-child(3) { animation-delay: .16s; }
-.hero > div:first-child > :nth-child(4) { animation-delay: .24s; }
-.hero > div:first-child > :nth-child(5) { animation-delay: .32s; }
 
-section { padding-block: 72px; }
-.eyebrow { font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
-h2 { font-family: var(--f-display); font-weight: 800; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.02; letter-spacing: -.03em; margin: 10px 0 14px; text-wrap: balance; }
-.sub { color: var(--muted); font-size: 18px; max-width: 56ch; margin: 0; }
+section { padding-block: 80px; }
+.eyebrow { font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+h2 { font-family: var(--fd); font-weight: 700; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.05; letter-spacing: -.025em; margin: 10px 0 14px; text-wrap: balance; }
+h2 em { font-style: normal; color: var(--teal); }
+.sub { color: var(--ink2); font-size: 18px; max-width: 58ch; margin: 0; }
 
 /* Video */
-.video { margin-top: 36px; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 28px; background: linear-gradient(135deg, var(--green-deep), var(--green)); position: relative; overflow: hidden; display: grid; place-items: center; color: #fff; }
-.video::before { content: ""; position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.06); right: -10%; top: -30%; }
-.play { width: 92px; height: 92px; border-radius: 50%; background: #fff; border: 0; cursor: pointer; display: grid; place-items: center; box-shadow: 0 20px 50px rgba(0,0,0,.25); position: relative; }
-.play::after { content: ""; border-left: 26px solid var(--green); border-top: 16px solid transparent; border-bottom: 16px solid transparent; margin-left: 6px; }
-.video p { position: absolute; bottom: 22px; left: 28px; margin: 0; font-weight: 600; }
+.video { margin-top: 36px; position: relative; border-radius: var(--r-xl); overflow: hidden; background: var(--deep); box-shadow: var(--sh-3); aspect-ratio: 16 / 9; max-width: 100%; }
+.video video { width: 100%; height: 100%; display: block; object-fit: cover; background: var(--deep); }
+.play-ov { position: absolute; inset: 0; border: 0; padding: 0; cursor: pointer; display: grid; place-items: center; background: linear-gradient(180deg, rgba(3,28,38,.05), rgba(3,28,38,.55)); color: #fff; }
+.play-ov .pbtn { width: 96px; height: 96px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 20px 50px rgba(0,0,0,.3); transition: transform .2s; }
+.play-ov:hover .pbtn { transform: scale(1.06); }
+.play-ov .pbtn::after { content: ""; border-left: 28px solid var(--teal); border-top: 17px solid transparent; border-bottom: 17px solid transparent; margin-left: 7px; }
+.play-ov span.cap { position: absolute; left: 28px; bottom: 22px; font-weight: 600; font-size: 16px; }
+
+/* Screens */
+.screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 44px; align-items: start; }
+.shot { text-align: center; }
+.shot .frame { background: var(--deep); border-radius: 38px; padding: 9px; box-shadow: var(--sh-2); max-width: 260px; margin: 0 auto; transition: transform .4s; }
+.shot .frame img { border-radius: 30px; }
+.shot:nth-child(2) .frame { transform: translateY(-24px); }
+.shot:hover .frame { transform: translateY(-8px); }
+.shot:nth-child(2):hover .frame { transform: translateY(-32px); }
+.shot h3 { font-family: var(--fd); font-size: 20px; margin: 22px 0 4px; }
+.shot p { color: var(--mute); margin: 0 auto; font-size: 15px; max-width: 30ch; }
+.desk { margin-top: 64px; background: var(--card); border-radius: var(--r-l); box-shadow: var(--sh-3); overflow: hidden; border: 1px solid var(--line); }
+.desk .bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 16px; border-bottom: 1px solid var(--line2); }
+.desk .bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); }
+.desk .view { max-height: min(640px, 56vw); overflow: hidden; }
+.desk .bar span { margin-left: 12px; font-size: 12px; color: var(--mute); background: var(--bg); border-radius: 6px; padding: 3px 10px; }
 
 /* Steps */
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 40px; counter-reset: s; }
-.step { background: var(--paper); border-radius: 22px; padding: 26px 22px; border: 1px solid var(--line); position: relative; }
-.step::before { counter-increment: s; content: counter(s); font-family: var(--f-display); font-weight: 800; font-size: 15px; width: 36px; height: 36px; border-radius: 12px; background: var(--mint); color: var(--green-deep); display: grid; place-items: center; margin-bottom: 18px; }
-.step h3 { font-family: var(--f-display); font-size: 21px; margin: 0 0 6px; line-height: 1.2; }
-.step p { margin: 0; color: var(--muted); font-size: 15px; }
+.step { background: var(--card); border-radius: var(--r-l); padding: 26px 22px; border: 1px solid var(--line); box-shadow: var(--sh-1); }
+.step::before { counter-increment: s; content: counter(s); font-family: var(--fd); font-weight: 700; font-size: 16px; width: 40px; height: 40px; border-radius: 12px; background: var(--teal); color: #fff; display: grid; place-items: center; margin-bottom: 18px; }
+.step h3 { font-family: var(--fd); font-size: 21px; margin: 0 0 6px; line-height: 1.2; }
+.step p { margin: 0; color: var(--ink2); font-size: 15px; }
 .areas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-.areas span { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 500; font-size: 15px; }
+.areas span { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 500; font-size: 15px; }
 
 /* Waitlist */
-.waitlist { background: var(--ink); color: #fff; border-radius: 36px; padding: 56px; display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; }
-.waitlist .sub { color: #b7c7bf; }
-.waitlist .eyebrow { color: var(--sun); }
+.waitlist { background: var(--deep); color: #fff; border-radius: 36px; padding: 56px; display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; position: relative; overflow: hidden; }
+.waitlist::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(101,200,166,.22), transparent 70%); left: -120px; bottom: -160px; }
+.waitlist > * { position: relative; }
+.waitlist .sub { color: #A7B5B8; }
+.waitlist .eyebrow { color: var(--mint); }
+.waitlist h2 em { color: var(--mint); }
 .countdown { display: flex; gap: 12px; margin-top: 28px; }
-.countdown div { background: rgba(255,255,255,.08); border-radius: 16px; padding: 12px 16px; text-align: center; min-width: 74px; }
-.countdown b { display: block; font-family: var(--f-display); font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.countdown small { color: #b7c7bf; font-size: 12px; }
-.card { background: var(--paper); color: var(--ink); border-radius: 26px; padding: 28px; }
+.countdown div { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 12px 16px; text-align: center; min-width: 76px; }
+.countdown b { display: block; font-family: var(--fd); font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.countdown small { color: #A7B5B8; font-size: 12px; }
+.card { background: var(--card); color: var(--ink); border-radius: 26px; padding: 28px; }
 .tabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); padding: 5px; border-radius: 999px; margin-bottom: 22px; }
-.tabs button { border: 0; background: transparent; padding: 11px; border-radius: 999px; font: 600 15px var(--f-body); cursor: pointer; color: var(--muted); }
-.tabs button[aria-selected="true"] { background: var(--paper); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.tabs button { border: 0; background: transparent; padding: 11px; border-radius: 999px; font: 600 15px var(--ft); cursor: pointer; color: var(--mute); }
+.tabs button[aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: var(--sh-1); }
 form { display: grid; gap: 14px; }
-label.field { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
-input[type=email], select.inp { font: 500 16px var(--f-body); padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; width: 100%; color: var(--ink); }
-input[type=email]:focus, select.inp:focus { border-color: var(--green); outline: none; }
+label.field, div.field { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+input[type=email], select.inp { font: 500 16px var(--ft); padding: 14px 16px; border-radius: var(--r-m); border: 1.5px solid var(--line); background: #fff; width: 100%; color: var(--ink); }
+input[type=email]:focus, select.inp:focus { border-color: var(--teal); outline: none; }
 .radio { display: flex; gap: 10px; flex-wrap: wrap; }
 .radio label { display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 14px; font-weight: 500; font-size: 14px; cursor: pointer; }
-.radio label:has(input:checked) { border-color: var(--green); background: var(--mint); }
-.consent { display: grid; grid-template-columns: auto 1fr; gap: 10px; font-size: 13px; color: var(--muted); align-items: start; }
-.consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--green); }
+.radio label:has(input:checked) { border-color: var(--teal); background: var(--teal-50); }
+.radio input { accent-color: var(--teal); }
+.consent { display: grid; grid-template-columns: auto 1fr; gap: 10px; font-size: 13px; color: var(--mute); align-items: start; }
+.consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--teal); }
 .hp { position: absolute; left: -5000px; }
-.err { color: #b42318; font-size: 14px; font-weight: 600; margin: 0; }
+.err { color: var(--red); font-size: 14px; font-weight: 600; margin: 0; }
 .done { text-align: center; padding: 30px 10px; }
-.done .big { font-size: 46px; }
-.done h3 { font-family: var(--f-display); font-size: 26px; margin: 8px 0 6px; }
-.done p { color: var(--muted); margin: 0; }
+.done .big { width: 64px; height: 64px; border-radius: 50%; background: var(--mint-50); color: var(--mint-d); display: grid; place-items: center; margin: 0 auto; font-size: 30px; }
+.done h3 { font-family: var(--fd); font-size: 26px; margin: 14px 0 6px; }
+.done p { color: var(--mute); margin: 0; }
 
-footer { padding-block: 40px; color: var(--muted); font-size: 14px; }
-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer { padding-block: 40px; color: var(--mute); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+footer img { height: 26px; width: auto; }
 
-/* Cookie consent */
-.cookie { position: fixed; left: 20px; right: 20px; bottom: 20px; max-width: 520px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; box-shadow: 0 20px 50px rgba(15,36,28,.18); z-index: 30; font-size: 14px; }
-.cookie p { margin: 0 0 12px; color: var(--muted); }
+.cookie { position: fixed; left: 20px; right: 20px; bottom: 20px; max-width: 520px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); padding: 18px 20px; box-shadow: var(--sh-3); z-index: 30; font-size: 14px; }
+.cookie p { margin: 0 0 12px; color: var(--ink2); }
 .cookie .row { display: flex; gap: 8px; flex-wrap: wrap; }
 
-@media (max-width: 920px) {
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.vis { opacity: 1; transform: none; }
+
+@media (max-width: 960px) {
   .hero, .waitlist { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .waitlist { padding: 32px 22px; border-radius: 28px; }
-  .stage { min-height: 500px; }
+  .screens { grid-template-columns: 1fr; gap: 40px; }
+  .shot:nth-child(2) .frame { transform: none; }
 }
 @media (max-width: 560px) {
   .steps { grid-template-columns: 1fr; }
   .fc1, .fc2 { display: none; }
   .nav-right .btn { display: none; }
   .countdown div { min-width: 0; flex: 1; }
+  .play-ov .pbtn { width: 70px; height: 70px; }
 }
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
 
 <nav class="top" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Loqelo"><span class="logo-mark" aria-hidden="true"></span>loqelo</a>
+    <a class="brand" href="#top"><img src="assets/logo.svg" alt="Loqelo" width="133" height="34"></a>
     <div class="nav-right">
-      <label class="lang"><span class="hp" data-i18n="lang">Language</span>
-        <select id="lang" aria-label="Language"></select>
-      </label>
-      <a class="btn sm green" href="#waitlist" data-i18n="navCta">Join the waitlist</a>
+      <label class="lang"><span class="sr" data-i18n="lang">Language</span><select id="lang" aria-label="Language"></select></label>
+      <a class="btn sm" href="#waitlist" data-i18n="navCta">Join the waitlist</a>
     </div>
   </div>
 </nav>
 
 <header class="wrap hero" id="top">
-  <div>
+  <div class="hero-copy">
     <span class="badge"><i></i><span data-i18n="badge">Launching February 2027</span></span>
     <h1 data-i18n-html="h1">Everything your place <em>needs.</em></h1>
-    <p class="lead" data-i18n="lead">Describe what your home, garden or office needs. Loqelo matches you with trusted local providers, you compare their offers and choose the best one.</p>
+    <p class="lead" data-i18n="lead">Describe what your home, garden or office needs in your own words. Loqelo finds the right services, verified providers send you offers, and you choose the best one.</p>
     <div class="cta">
-      <a class="btn green" href="#waitlist" data-tab="customer" data-i18n="ctaCustomer">I need a service</a>
+      <a class="btn" href="#waitlist" data-tab="customer" data-i18n="ctaCustomer">I need a service</a>
       <a class="btn ghost" href="#waitlist" data-tab="provider" data-i18n="ctaProvider">I provide services</a>
     </div>
-    <div class="trust">
-      <span data-i18n="t1">Free for customers</span>
-      <span data-i18n="t2">Verified providers</span>
-      <span data-i18n="t3">Offers in hours, not days</span>
-    </div>
+    <div class="trust"><span data-i18n="t1">Free for customers</span><span data-i18n="t2">Verified providers</span><span data-i18n="t3">Offers in hours, not days</span></div>
   </div>
   <div class="stage" aria-hidden="true">
-    <div class="blob"></div>
-    <div class="sun"></div>
+    <div class="halo"></div>
+    <div class="ring"></div>
     <div class="phone">
       <div class="screen">
-        <div class="hi" data-i18n="mHi">Good morning, Anna</div>
-        <h4 data-i18n="mQ">What does your place need today?</h4>
-        <div class="search" id="demo-search"><span class="ico">⌕</span><span id="demo-typed"></span><span class="caret"></span></div>
-        <div class="cats">
-          <div class="cat" data-cat="home"><b>🏠</b><span data-i18n="cHome">Home</span></div>
-          <div class="cat" data-cat="garden"><b>🌿</b><span data-i18n="cGarden">Garden</span></div>
-          <div class="cat" data-cat="office"><b>🏢</b><span data-i18n="cOffice">Office</span></div>
+        <div class="app-top"><img src="assets/logo.svg" alt=""><span data-i18n="login">Log in</span></div>
+        <p class="app-h" data-i18n-html="appH">What do you need? <b>Describe it.</b></p>
+        <div class="req">
+          <div class="req-in"><small data-i18n="appQ">What do you need?</small><p><span id="demo-typed"></span><span class="caret"></span></p></div>
+          <div class="found" id="demo-found"><small id="demo-found-t"></small><div class="chips" id="demo-chips"></div></div>
         </div>
-        <div class="hi" id="demo-label"></div>
+        <div class="quotes-h"><b id="demo-qt"></b><span id="demo-qs"></span></div>
         <div class="offers" id="demo-offers"></div>
       </div>
     </div>
-    <div class="float-card fc1"><span class="dot" style="background:var(--mint)">⚡</span><span><b>2 h</b><span data-i18n="fc1">average time to first offer</span></span></div>
-    <div class="float-card fc2"><span class="dot" style="background:#fff3cc">★</span><span><b>4.8</b><span data-i18n="fc2">provider rating</span></span></div>
+    <div class="float-card fc1"><span class="dot" style="background:var(--mint-50);color:var(--mint-d)">⚡</span><span><b>2 h</b><span data-i18n="fc1">average time to first offer</span></span></div>
+    <div class="float-card fc2"><span class="dot" style="background:var(--amber-50);color:var(--amber)">★</span><span><b>4.8</b><span data-i18n="fc2">average provider rating</span></span></div>
   </div>
 </header>
 
 <section id="video">
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="eyebrow" data-i18n="vEyebrow">See it in action</div>
-    <h2 data-i18n="vTitle">One request. Real offers. Your choice.</h2>
+    <h2 data-i18n-html="vTitle">One request. Real offers. <em>Your choice.</em></h2>
     <p class="sub" data-i18n="vSub">Watch how Loqelo turns a simple description into offers from providers near you.</p>
     <div class="video">
-      <button class="play" type="button" aria-label="Play video"></button>
-      <p data-i18n="vNote">Loqelo promo video · 1:05</p>
+      <video id="promo" src="assets/loqelo-promo.mp4#t=0.5" preload="metadata" playsinline></video>
+      <button class="play-ov" id="play" type="button" aria-label="Play video"><span class="pbtn"></span><span class="cap" data-i18n="vNote">Watch the Loqelo film</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="app">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="sEyebrow">A first look</div>
+      <h2 data-i18n-html="sTitle">Simple for customers. <em>Clear for providers.</em></h2>
+      <p class="sub" data-i18n="sSub">A preview of the Loqelo app you'll get access to at launch.</p>
+    </div>
+    <div class="screens">
+      <div class="shot reveal"><div class="frame"><img src="assets/app-home.png" alt="Loqelo app: describe what you need" width="585" height="1266" loading="lazy"></div><h3 data-i18n="sh1">Describe it in your words</h3><p data-i18n="sp1">Loqelo recognises the services you need, even several in one sentence.</p></div>
+      <div class="shot reveal"><div class="frame"><img src="assets/app-quotes.png" alt="Loqelo app: compare offers" width="585" height="1266" loading="lazy"></div><h3 data-i18n="sh2">Compare real offers</h3><p data-i18n="sp2">Best match, lowest price or fastest: see ratings, timing and a message from each provider.</p></div>
+      <div class="shot reveal"><div class="frame"><img src="assets/app-map.png" alt="Loqelo app: providers near you" width="585" height="1266" loading="lazy"></div><h3 data-i18n="sh3">Find providers nearby</h3><p data-i18n="sp3">See who works in your area on the map and pick the one that suits you.</p></div>
+    </div>
+    <div class="desk reveal">
+      <div class="bar"><i></i><i></i><i></i><span>loqelo.com</span></div>
+      <div class="view"><img src="assets/desktop-quotes.png" alt="Loqelo on desktop: job details and quotes" width="1440" height="1804" loading="lazy"></div>
     </div>
   </div>
 </section>
 
 <section id="how">
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="eyebrow" data-i18n="hEyebrow">How it works</div>
-    <h2 data-i18n="hTitle">From "I need" to "done" in four steps</h2>
+    <h2 data-i18n-html="hTitle">From "I need" to <em>"done"</em> in four steps</h2>
     <div class="steps">
-      <div class="step"><h3 data-i18n="s1t">Describe your need</h3><p data-i18n="s1p">Tell us what needs doing, add photos and pick a time that suits you.</p></div>
+      <div class="step"><h3 data-i18n="s1t">Describe your need</h3><p data-i18n="s1p">Write what needs doing, add photos and pick a time that suits you.</p></div>
       <div class="step"><h3 data-i18n="s2t">We match providers</h3><p data-i18n="s2p">Loqelo sends your request to verified providers who work in your area.</p></div>
-      <div class="step"><h3 data-i18n="s3t">Compare offers</h3><p data-i18n="s3p">See prices, ratings and availability side by side, and chat before you decide.</p></div>
+      <div class="step"><h3 data-i18n="s3t">Compare offers</h3><p data-i18n="s3p">See prices, ratings and availability side by side, and message them before you decide.</p></div>
       <div class="step"><h3 data-i18n="s4t">Choose and relax</h3><p data-i18n="s4p">Pick the best offer. Your provider takes it from there.</p></div>
     </div>
     <div class="areas">
-      <span data-i18n="a1">🔧 Repairs</span><span data-i18n="a2">🧹 Cleaning</span><span data-i18n="a3">🌳 Gardening</span><span data-i18n="a4">🎨 Painting</span><span data-i18n="a5">⚡ Electrical</span><span data-i18n="a6">📦 Moving</span><span data-i18n="a7">🪑 Office setup</span>
+      <span data-i18n="a1">Home</span><span data-i18n="a2">Garden</span><span data-i18n="a3">Construction</span><span data-i18n="a4">Installations</span><span data-i18n="a5">Pets</span><span data-i18n="a6">Vehicles</span><span data-i18n="a7">Personal services</span><span data-i18n="a8">Moving &amp; transport</span>
     </div>
   </div>
 </section>
 
 <section id="waitlist">
   <div class="wrap">
-    <div class="waitlist">
+    <div class="waitlist reveal">
       <div>
         <div class="eyebrow" data-i18n="wEyebrow">Early access</div>
-        <h2 data-i18n="wTitle">Be first when Loqelo opens in your country</h2>
+        <h2 data-i18n-html="wTitle">Be first when Loqelo opens <em>in your country</em></h2>
         <p class="sub" data-i18n="wSub">Join the waitlist today. Customers get early access, providers get a free founding profile.</p>
         <div class="countdown" id="countdown" aria-label="Time until launch"></div>
       </div>
@@ -286,7 +338,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
           <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="consent"><input type="checkbox" id="f-consent" required> <span data-i18n="consent">I agree to receive emails about the Loqelo launch and updates. I can unsubscribe at any time.</span></label>
           <p class="err" id="f-err" role="alert" hidden></p>
-          <button class="btn green" type="submit" data-i18n="submit">Join the waitlist</button>
+          <button class="btn" type="submit" data-i18n="submit">Join the waitlist</button>
         </form>
       </div>
     </div>
@@ -295,101 +347,52 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Loqelo</span>
+    <img src="assets/logo.svg" alt="Loqelo" width="102" height="26">
     <span data-i18n="foot">Home · Garden · Office services, launching February 2027</span>
+    <span>© 2026 Loqelo</span>
   </div>
 </footer>
 
 <div class="cookie" id="cookie" hidden>
   <p data-i18n="cookie">We use privacy-friendly analytics to count visits and sign-ups. Your email is never shared with analytics.</p>
   <div class="row">
-    <button class="btn sm green" type="button" data-consent="yes" data-i18n="accept">Accept analytics</button>
+    <button class="btn sm" type="button" data-consent="yes" data-i18n="accept">Accept analytics</button>
     <button class="btn sm ghost" type="button" data-consent="no" data-i18n="decline">Decline</button>
   </div>
 </div>
 
 <script>
-/* ---------------- Translations (EN, ES, DE, PL, CS) ---------------- */
+/* ================= Content (edit texts here) ================= */
 const I18N = {
-  en: { lang: "Language", navCta: "Join the waitlist", badge: "Launching February 2027", h1: "Everything your place <em>needs.</em>", lead: "Describe what your home, garden or office needs. Loqelo matches you with trusted local providers, you compare their offers and choose the best one.", ctaCustomer: "I need a service", ctaProvider: "I provide services", t1: "Free for customers", t2: "Verified providers", t3: "Offers in hours, not days", mHi: "Good morning, Anna", mQ: "What does your place need today?", mSearch: "e.g. fix a leaking tap", cHome: "Home", cGarden: "Garden", cOffice: "Office", mOffers: "3 offers for \"Hedge trimming\"", fc1: "average time to first offer", fc2: "provider rating", vEyebrow: "See it in action", vTitle: "One request. Real offers. Your choice.", vSub: "Watch how Loqelo turns a simple description into offers from providers near you.", vNote: "Loqelo promo video · 1:05", hEyebrow: "How it works", hTitle: "From \"I need\" to \"done\" in four steps", s1t: "Describe your need", s1p: "Tell us what needs doing, add photos and pick a time that suits you.", s2t: "We match providers", s2p: "Loqelo sends your request to verified providers who work in your area.", s3t: "Compare offers", s3p: "See prices, ratings and availability side by side, and chat before you decide.", s4t: "Choose and relax", s4p: "Pick the best offer. Your provider takes it from there.", a1: "🔧 Repairs", a2: "🧹 Cleaning", a3: "🌳 Gardening", a4: "🎨 Painting", a5: "⚡ Electrical", a6: "📦 Moving", a7: "🪑 Office setup", wEyebrow: "Early access", wTitle: "Be first when Loqelo opens in your country", wSub: "Join the waitlist today. Customers get early access, providers get a free founding profile.", tabCustomer: "I need services", tabProvider: "I provide services", fEmail: "Email address", fCountryC: "Country of residence", fCountryP: "Country where you provide services", fType: "I am (optional)", individual: "An individual", business: "A business", consent: "I agree to receive emails about the Loqelo launch and updates. I can unsubscribe at any time.", submit: "Join the waitlist", errEmail: "Please enter a valid email address.", errCountry: "Please choose a country.", errConsent: "Please confirm you agree to receive launch emails.", doneT: "You're on the list!", doneC: "We'll email you as soon as Loqelo opens in {country}.", doneP: "Thanks! We'll invite you to create your founding provider profile before launch.", again: "Add another email", days: "days", hours: "hours", mins: "min", foot: "Home · Garden · Office services, launching February 2027", cookie: "We use privacy-friendly analytics to count visits and sign-ups. Your email is never shared with analytics.", accept: "Accept analytics", decline: "Decline", choose: "Choose a country" },
-  es: { lang: "Idioma", navCta: "Únete a la lista", badge: "Lanzamiento en febrero de 2027", h1: "Todo lo que tu espacio <em>necesita.</em>", lead: "Describe lo que necesita tu casa, jardín u oficina. Loqelo te conecta con profesionales locales de confianza, comparas sus ofertas y eliges la mejor.", ctaCustomer: "Necesito un servicio", ctaProvider: "Ofrezco servicios", t1: "Gratis para clientes", t2: "Profesionales verificados", t3: "Ofertas en horas, no en días", mHi: "Buenos días, Anna", mQ: "¿Qué necesita tu espacio hoy?", mSearch: "p. ej. arreglar un grifo", cHome: "Hogar", cGarden: "Jardín", cOffice: "Oficina", mOffers: "3 ofertas para \"Podar el seto\"", fc1: "tiempo medio hasta la primera oferta", fc2: "valoración de profesionales", vEyebrow: "Míralo en acción", vTitle: "Una solicitud. Ofertas reales. Tú decides.", vSub: "Mira cómo Loqelo convierte una descripción sencilla en ofertas de profesionales cerca de ti.", vNote: "Vídeo promocional de Loqelo · 1:05", hEyebrow: "Cómo funciona", hTitle: "De \"lo necesito\" a \"hecho\" en cuatro pasos", s1t: "Describe lo que necesitas", s1p: "Cuéntanos qué hay que hacer, añade fotos y elige cuándo te viene bien.", s2t: "Buscamos profesionales", s2p: "Loqelo envía tu solicitud a profesionales verificados de tu zona.", s3t: "Compara ofertas", s3p: "Ve precios, valoraciones y disponibilidad lado a lado y chatea antes de decidir.", s4t: "Elige y despreocúpate", s4p: "Escoge la mejor oferta. Tu profesional se encarga del resto.", a1: "🔧 Reparaciones", a2: "🧹 Limpieza", a3: "🌳 Jardinería", a4: "🎨 Pintura", a5: "⚡ Electricidad", a6: "📦 Mudanzas", a7: "🪑 Montaje de oficinas", wEyebrow: "Acceso anticipado", wTitle: "Sé el primero cuando Loqelo llegue a tu país", wSub: "Únete hoy a la lista. Los clientes tendrán acceso anticipado y los profesionales un perfil fundador gratis.", tabCustomer: "Necesito servicios", tabProvider: "Ofrezco servicios", fEmail: "Correo electrónico", fCountryC: "País de residencia", fCountryP: "País donde ofreces servicios", fType: "Soy (opcional)", individual: "Particular", business: "Empresa", consent: "Acepto recibir correos sobre el lanzamiento y novedades de Loqelo. Puedo darme de baja cuando quiera.", submit: "Unirme a la lista", errEmail: "Introduce un correo válido.", errCountry: "Elige un país.", errConsent: "Confirma que aceptas recibir correos del lanzamiento.", doneT: "¡Ya estás en la lista!", doneC: "Te escribiremos en cuanto Loqelo abra en {country}.", doneP: "¡Gracias! Te invitaremos a crear tu perfil fundador antes del lanzamiento.", again: "Añadir otro correo", days: "días", hours: "horas", mins: "min", foot: "Servicios para hogar, jardín y oficina · febrero de 2027", cookie: "Usamos analítica respetuosa con la privacidad para contar visitas y registros. Tu correo nunca se comparte con la analítica.", accept: "Aceptar analítica", decline: "Rechazar", choose: "Elige un país" },
-  de: { lang: "Sprache", navCta: "Auf die Warteliste", badge: "Start im Februar 2027", h1: "Alles, was dein Ort <em>braucht.</em>", lead: "Beschreibe, was dein Zuhause, Garten oder Büro braucht. Loqelo verbindet dich mit geprüften Anbietern vor Ort, du vergleichst Angebote und wählst das beste.", ctaCustomer: "Ich brauche einen Service", ctaProvider: "Ich biete Services an", t1: "Kostenlos für Kunden", t2: "Geprüfte Anbieter", t3: "Angebote in Stunden, nicht Tagen", mHi: "Guten Morgen, Anna", mQ: "Was braucht dein Ort heute?", mSearch: "z. B. tropfenden Hahn reparieren", cHome: "Zuhause", cGarden: "Garten", cOffice: "Büro", mOffers: "3 Angebote für \"Heckenschnitt\"", fc1: "bis zum ersten Angebot", fc2: "Anbieterbewertung", vEyebrow: "So funktioniert's", vTitle: "Eine Anfrage. Echte Angebote. Deine Wahl.", vSub: "Sieh, wie Loqelo aus einer einfachen Beschreibung Angebote von Anbietern in deiner Nähe macht.", vNote: "Loqelo Promo-Video · 1:05", hEyebrow: "Ablauf", hTitle: "Von \"ich brauche\" zu \"erledigt\" in vier Schritten", s1t: "Bedarf beschreiben", s1p: "Sag uns, was zu tun ist, füge Fotos hinzu und wähle einen passenden Termin.", s2t: "Wir finden Anbieter", s2p: "Loqelo schickt deine Anfrage an geprüfte Anbieter in deiner Region.", s3t: "Angebote vergleichen", s3p: "Preise, Bewertungen und Verfügbarkeit nebeneinander, Chat inklusive.", s4t: "Wählen und entspannen", s4p: "Nimm das beste Angebot. Dein Anbieter übernimmt den Rest.", a1: "🔧 Reparaturen", a2: "🧹 Reinigung", a3: "🌳 Gartenarbeit", a4: "🎨 Malerarbeiten", a5: "⚡ Elektrik", a6: "📦 Umzug", a7: "🪑 Büroeinrichtung", wEyebrow: "Früher Zugang", wTitle: "Sei dabei, wenn Loqelo in deinem Land startet", wSub: "Trag dich heute ein. Kunden erhalten frühen Zugang, Anbieter ein kostenloses Gründerprofil.", tabCustomer: "Ich brauche Services", tabProvider: "Ich biete Services an", fEmail: "E-Mail-Adresse", fCountryC: "Wohnsitzland", fCountryP: "Land, in dem du Services anbietest", fType: "Ich bin (optional)", individual: "Privatperson", business: "Unternehmen", consent: "Ich möchte E-Mails zum Start und zu Neuigkeiten von Loqelo erhalten. Abmeldung jederzeit möglich.", submit: "Eintragen", errEmail: "Bitte gib eine gültige E-Mail-Adresse ein.", errCountry: "Bitte wähle ein Land.", errConsent: "Bitte bestätige den Erhalt der Start-E-Mails.", doneT: "Du bist auf der Liste!", doneC: "Wir melden uns, sobald Loqelo in {country} startet.", doneP: "Danke! Wir laden dich vor dem Start zu deinem Gründerprofil ein.", again: "Weitere E-Mail eintragen", days: "Tage", hours: "Std.", mins: "Min.", foot: "Services für Zuhause, Garten und Büro · Februar 2027", cookie: "Wir nutzen datenschutzfreundliche Statistik, um Besuche und Anmeldungen zu zählen. Deine E-Mail wird nie an die Statistik weitergegeben.", accept: "Statistik erlauben", decline: "Ablehnen", choose: "Land wählen" },
-  pl: { lang: "Język", navCta: "Dołącz do listy", badge: "Start w lutym 2027", h1: "Wszystko, czego potrzebuje <em>twoje miejsce.</em>", lead: "Opisz, czego potrzebuje twój dom, ogród lub biuro. Loqelo połączy cię ze sprawdzonymi wykonawcami w okolicy, porównasz oferty i wybierzesz najlepszą.", ctaCustomer: "Potrzebuję usługi", ctaProvider: "Świadczę usługi", t1: "Bezpłatnie dla klientów", t2: "Zweryfikowani wykonawcy", t3: "Oferty w godzinach, nie dniach", mHi: "Dzień dobry, Anna", mQ: "Czego dziś potrzebuje twoje miejsce?", mSearch: "np. naprawa cieknącego kranu", cHome: "Dom", cGarden: "Ogród", cOffice: "Biuro", mOffers: "3 oferty: \"Przycinanie żywopłotu\"", fc1: "średni czas do pierwszej oferty", fc2: "ocena wykonawców", vEyebrow: "Zobacz w działaniu", vTitle: "Jedno zlecenie. Prawdziwe oferty. Twój wybór.", vSub: "Zobacz, jak Loqelo zamienia prosty opis w oferty wykonawców z twojej okolicy.", vNote: "Film promocyjny Loqelo · 1:05", hEyebrow: "Jak to działa", hTitle: "Od \"potrzebuję\" do \"gotowe\" w czterech krokach", s1t: "Opisz potrzebę", s1p: "Napisz, co trzeba zrobić, dodaj zdjęcia i wybierz dogodny termin.", s2t: "Dobieramy wykonawców", s2p: "Loqelo wysyła zlecenie do zweryfikowanych wykonawców z twojej okolicy.", s3t: "Porównaj oferty", s3p: "Ceny, oceny i dostępność obok siebie, a przed decyzją możesz porozmawiać.", s4t: "Wybierz i odpocznij", s4p: "Wybierz najlepszą ofertę. Resztą zajmie się wykonawca.", a1: "🔧 Naprawy", a2: "🧹 Sprzątanie", a3: "🌳 Ogrodnictwo", a4: "🎨 Malowanie", a5: "⚡ Elektryka", a6: "📦 Przeprowadzki", a7: "🪑 Urządzanie biur", wEyebrow: "Wczesny dostęp", wTitle: "Bądź pierwszy, gdy Loqelo wystartuje w twoim kraju", wSub: "Dołącz dziś. Klienci dostaną wczesny dostęp, wykonawcy darmowy profil założycielski.", tabCustomer: "Potrzebuję usług", tabProvider: "Świadczę usługi", fEmail: "Adres e-mail", fCountryC: "Kraj zamieszkania", fCountryP: "Kraj, w którym świadczysz usługi", fType: "Jestem (opcjonalnie)", individual: "Osobą prywatną", business: "Firmą", consent: "Zgadzam się na e-maile o starcie i nowościach Loqelo. Mogę zrezygnować w każdej chwili.", submit: "Dołącz do listy", errEmail: "Podaj poprawny adres e-mail.", errCountry: "Wybierz kraj.", errConsent: "Potwierdź zgodę na e-maile o starcie.", doneT: "Jesteś na liście!", doneC: "Napiszemy, gdy tylko Loqelo wystartuje w kraju: {country}.", doneP: "Dziękujemy! Przed startem zaprosimy cię do utworzenia profilu założycielskiego.", again: "Dodaj kolejny e-mail", days: "dni", hours: "godz.", mins: "min", foot: "Usługi dla domu, ogrodu i biura · luty 2027", cookie: "Używamy przyjaznej prywatności analityki do liczenia wizyt i zapisów. Twój e-mail nigdy nie trafia do analityki.", accept: "Akceptuj analitykę", decline: "Odrzuć", choose: "Wybierz kraj" },
-  cs: { lang: "Jazyk", navCta: "Přidat se na seznam", badge: "Spouštíme v únoru 2027", h1: "Vše, co vaše místo <em>potřebuje.</em>", lead: "Popište, co potřebuje váš domov, zahrada nebo kancelář. Loqelo vás spojí s ověřenými místními poskytovateli, porovnáte nabídky a vyberete tu nejlepší.", ctaCustomer: "Potřebuji službu", ctaProvider: "Nabízím služby", t1: "Zdarma pro zákazníky", t2: "Ověření poskytovatelé", t3: "Nabídky během hodin, ne dnů", mHi: "Dobré ráno, Anno", mQ: "Co dnes potřebuje vaše místo?", mSearch: "např. oprava kapajícího kohoutku", cHome: "Domov", cGarden: "Zahrada", cOffice: "Kancelář", mOffers: "3 nabídky: \"Stříhání živého plotu\"", fc1: "průměrná doba do první nabídky", fc2: "hodnocení poskytovatelů", vEyebrow: "Podívejte se", vTitle: "Jedna poptávka. Skutečné nabídky. Vaše volba.", vSub: "Podívejte se, jak Loqelo promění jednoduchý popis v nabídky poskytovatelů ve vašem okolí.", vNote: "Promo video Loqelo · 1:05", hEyebrow: "Jak to funguje", hTitle: "Od \"potřebuji\" k \"hotovo\" ve čtyřech krocích", s1t: "Popište potřebu", s1p: "Napište, co je třeba udělat, přidejte fotky a zvolte vhodný termín.", s2t: "Najdeme poskytovatele", s2p: "Loqelo pošle poptávku ověřeným poskytovatelům ve vaší oblasti.", s3t: "Porovnejte nabídky", s3p: "Ceny, hodnocení a dostupnost vedle sebe, s chatem před rozhodnutím.", s4t: "Vyberte a odpočívejte", s4p: "Zvolte nejlepší nabídku. Zbytek zařídí poskytovatel.", a1: "🔧 Opravy", a2: "🧹 Úklid", a3: "🌳 Zahradnictví", a4: "🎨 Malování", a5: "⚡ Elektro", a6: "📦 Stěhování", a7: "🪑 Vybavení kanceláří", wEyebrow: "Předčasný přístup", wTitle: "Buďte první, až Loqelo spustí ve vaší zemi", wSub: "Přidejte se ještě dnes. Zákazníci získají předčasný přístup, poskytovatelé zakládající profil zdarma.", tabCustomer: "Potřebuji služby", tabProvider: "Nabízím služby", fEmail: "E-mailová adresa", fCountryC: "Země bydliště", fCountryP: "Země, kde poskytujete služby", fType: "Jsem (volitelné)", individual: "Fyzická osoba", business: "Firma", consent: "Souhlasím se zasíláním e-mailů o spuštění a novinkách Loqelo. Odhlásit se mohu kdykoli.", submit: "Přidat se", errEmail: "Zadejte platný e-mail.", errCountry: "Vyberte zemi.", errConsent: "Potvrďte souhlas se zasíláním e-mailů.", doneT: "Jste na seznamu!", doneC: "Ozveme se, jakmile Loqelo spustí v zemi {country}.", doneP: "Děkujeme! Před spuštěním vás pozveme k vytvoření zakládajícího profilu.", again: "Přidat další e-mail", days: "dní", hours: "hod.", mins: "min", foot: "Služby pro domov, zahradu a kancelář · únor 2027", cookie: "Používáme analytiku šetrnou k soukromí pro počítání návštěv a registrací. Váš e-mail se do analytiky nikdy nedostane.", accept: "Povolit analytiku", decline: "Odmítnout", choose: "Vyberte zemi" }
+  en: { lang: "Language", navCta: "Join the waitlist", badge: "Launching February 2027", h1: "Everything your place <em>needs.</em>", lead: "Describe what your home, garden or office needs in your own words. Loqelo finds the right services, verified providers send you offers, and you choose the best one.", ctaCustomer: "I need a service", ctaProvider: "I provide services", t1: "Free for customers", t2: "Verified providers", t3: "Offers in hours, not days", login: "Log in", appH: "What do you need? <b>Describe it.</b>", appQ: "What do you need?", fc1: "average time to first offer", fc2: "average provider rating", vEyebrow: "See it in action", vTitle: "One request. Real offers. <em>Your choice.</em>", vSub: "Watch how Loqelo turns a simple description into offers from providers near you.", vNote: "Watch the Loqelo film", sEyebrow: "A first look", sTitle: "Simple for customers. <em>Clear for providers.</em>", sSub: "A preview of the Loqelo app you'll get access to at launch.", sh1: "Describe it in your words", sp1: "Loqelo recognises the services you need, even several in one sentence.", sh2: "Compare real offers", sp2: "Best match, lowest price or fastest: see ratings, timing and a message from each provider.", sh3: "Find providers nearby", sp3: "See who works in your area on the map and pick the one that suits you.", hEyebrow: "How it works", hTitle: "From \"I need\" to <em>\"done\"</em> in four steps", s1t: "Describe your need", s1p: "Write what needs doing, add photos and pick a time that suits you.", s2t: "We match providers", s2p: "Loqelo sends your request to verified providers who work in your area.", s3t: "Compare offers", s3p: "See prices, ratings and availability side by side, and message them before you decide.", s4t: "Choose and relax", s4p: "Pick the best offer. Your provider takes it from there.", a1: "Home", a2: "Garden", a3: "Construction", a4: "Installations", a5: "Pets", a6: "Vehicles", a7: "Personal services", a8: "Moving & transport", wEyebrow: "Early access", wTitle: "Be first when Loqelo opens <em>in your country</em>", wSub: "Join the waitlist today. Customers get early access, providers get a free founding profile.", tabCustomer: "I need services", tabProvider: "I provide services", fEmail: "Email address", fCountryC: "Country of residence", fCountryP: "Country where you provide services", fType: "I am (optional)", individual: "An individual", business: "A business", consent: "I agree to receive emails about the Loqelo launch and updates. I can unsubscribe at any time.", submit: "Join the waitlist", errEmail: "Please enter a valid email address.", errCountry: "Please choose a country.", errConsent: "Please confirm you agree to receive launch emails.", doneT: "You're on the list!", doneC: "We'll email you as soon as Loqelo opens in {country}.", doneP: "Thanks! We'll invite you to create your founding provider profile before launch.", again: "Add another email", days: "days", hours: "hours", mins: "min", foot: "Home · Garden · Office services, launching February 2027", cookie: "We use privacy-friendly analytics to count visits and sign-ups. Your email is never shared with analytics.", accept: "Accept analytics", decline: "Decline", choose: "Choose a country" },
+  es: { lang: "Idioma", navCta: "Únete a la lista", badge: "Lanzamiento en febrero de 2027", h1: "Todo lo que tu espacio <em>necesita.</em>", lead: "Describe con tus palabras lo que necesita tu casa, jardín u oficina. Loqelo detecta los servicios, profesionales verificados te envían ofertas y tú eliges la mejor.", ctaCustomer: "Necesito un servicio", ctaProvider: "Ofrezco servicios", t1: "Gratis para clientes", t2: "Profesionales verificados", t3: "Ofertas en horas, no en días", login: "Entrar", appH: "¿Qué necesitas? <b>Descríbelo.</b>", appQ: "¿Qué necesitas?", fc1: "tiempo medio hasta la primera oferta", fc2: "valoración media de profesionales", vEyebrow: "Míralo en acción", vTitle: "Una solicitud. Ofertas reales. <em>Tú decides.</em>", vSub: "Mira cómo Loqelo convierte una descripción sencilla en ofertas de profesionales cerca de ti.", vNote: "Ver el vídeo de Loqelo", sEyebrow: "Un primer vistazo", sTitle: "Sencillo para clientes. <em>Claro para profesionales.</em>", sSub: "Así es la app de Loqelo a la que tendrás acceso en el lanzamiento.", sh1: "Descríbelo con tus palabras", sp1: "Loqelo reconoce los servicios que necesitas, incluso varios en una frase.", sh2: "Compara ofertas reales", sp2: "Mejor opción, precio más bajo o más rápida: valoraciones, plazos y un mensaje de cada profesional.", sh3: "Encuentra profesionales cerca", sp3: "Ve en el mapa quién trabaja en tu zona y elige el que más te convenga.", hEyebrow: "Cómo funciona", hTitle: "De \"lo necesito\" a <em>\"hecho\"</em> en cuatro pasos", s1t: "Describe lo que necesitas", s1p: "Escribe qué hay que hacer, añade fotos y elige cuándo te viene bien.", s2t: "Buscamos profesionales", s2p: "Loqelo envía tu solicitud a profesionales verificados de tu zona.", s3t: "Compara ofertas", s3p: "Precios, valoraciones y disponibilidad lado a lado, y mensajes antes de decidir.", s4t: "Elige y despreocúpate", s4p: "Escoge la mejor oferta. Tu profesional se encarga del resto.", a1: "Hogar", a2: "Jardín", a3: "Construcción", a4: "Instalaciones", a5: "Mascotas", a6: "Vehículos", a7: "Servicios personales", a8: "Mudanzas y transporte", wEyebrow: "Acceso anticipado", wTitle: "Sé el primero cuando Loqelo llegue <em>a tu país</em>", wSub: "Únete hoy a la lista. Los clientes tendrán acceso anticipado y los profesionales un perfil fundador gratis.", tabCustomer: "Necesito servicios", tabProvider: "Ofrezco servicios", fEmail: "Correo electrónico", fCountryC: "País de residencia", fCountryP: "País donde ofreces servicios", fType: "Soy (opcional)", individual: "Particular", business: "Empresa", consent: "Acepto recibir correos sobre el lanzamiento y novedades de Loqelo. Puedo darme de baja cuando quiera.", submit: "Unirme a la lista", errEmail: "Introduce un correo válido.", errCountry: "Elige un país.", errConsent: "Confirma que aceptas recibir correos del lanzamiento.", doneT: "¡Ya estás en la lista!", doneC: "Te escribiremos en cuanto Loqelo abra en {country}.", doneP: "¡Gracias! Te invitaremos a crear tu perfil fundador antes del lanzamiento.", again: "Añadir otro correo", days: "días", hours: "horas", mins: "min", foot: "Servicios para hogar, jardín y oficina · febrero de 2027", cookie: "Usamos analítica respetuosa con la privacidad para contar visitas y registros. Tu correo nunca se comparte con la analítica.", accept: "Aceptar analítica", decline: "Rechazar", choose: "Elige un país" },
+  de: { lang: "Sprache", navCta: "Auf die Warteliste", badge: "Start im Februar 2027", h1: "Alles, was dein Ort <em>braucht.</em>", lead: "Beschreibe in deinen Worten, was dein Zuhause, Garten oder Büro braucht. Loqelo erkennt die Services, geprüfte Anbieter schicken dir Angebote und du wählst das beste.", ctaCustomer: "Ich brauche einen Service", ctaProvider: "Ich biete Services an", t1: "Kostenlos für Kunden", t2: "Geprüfte Anbieter", t3: "Angebote in Stunden, nicht Tagen", login: "Anmelden", appH: "Was brauchst du? <b>Beschreib es.</b>", appQ: "Was brauchst du?", fc1: "bis zum ersten Angebot", fc2: "durchschnittliche Anbieterbewertung", vEyebrow: "So funktioniert's", vTitle: "Eine Anfrage. Echte Angebote. <em>Deine Wahl.</em>", vSub: "Sieh, wie Loqelo aus einer einfachen Beschreibung Angebote von Anbietern in deiner Nähe macht.", vNote: "Loqelo-Film ansehen", sEyebrow: "Ein erster Blick", sTitle: "Einfach für Kunden. <em>Klar für Anbieter.</em>", sSub: "Eine Vorschau der Loqelo-App, auf die du zum Start Zugriff bekommst.", sh1: "Beschreib es in deinen Worten", sp1: "Loqelo erkennt die Services, die du brauchst, auch mehrere in einem Satz.", sh2: "Echte Angebote vergleichen", sp2: "Beste Wahl, günstigster Preis oder am schnellsten: Bewertungen, Termine und eine Nachricht jedes Anbieters.", sh3: "Anbieter in der Nähe", sp3: "Sieh auf der Karte, wer in deiner Gegend arbeitet, und wähle den passenden.", hEyebrow: "Ablauf", hTitle: "Von \"ich brauche\" zu <em>\"erledigt\"</em> in vier Schritten", s1t: "Bedarf beschreiben", s1p: "Schreib, was zu tun ist, füge Fotos hinzu und wähle einen Termin.", s2t: "Wir finden Anbieter", s2p: "Loqelo schickt deine Anfrage an geprüfte Anbieter in deiner Region.", s3t: "Angebote vergleichen", s3p: "Preise, Bewertungen und Verfügbarkeit nebeneinander, Nachrichten inklusive.", s4t: "Wählen und entspannen", s4p: "Nimm das beste Angebot. Dein Anbieter übernimmt den Rest.", a1: "Zuhause", a2: "Garten", a3: "Bau", a4: "Installationen", a5: "Haustiere", a6: "Fahrzeuge", a7: "Persönliche Services", a8: "Umzug & Transport", wEyebrow: "Früher Zugang", wTitle: "Sei dabei, wenn Loqelo <em>in deinem Land</em> startet", wSub: "Trag dich heute ein. Kunden erhalten frühen Zugang, Anbieter ein kostenloses Gründerprofil.", tabCustomer: "Ich brauche Services", tabProvider: "Ich biete Services an", fEmail: "E-Mail-Adresse", fCountryC: "Wohnsitzland", fCountryP: "Land, in dem du Services anbietest", fType: "Ich bin (optional)", individual: "Privatperson", business: "Unternehmen", consent: "Ich möchte E-Mails zum Start und zu Neuigkeiten von Loqelo erhalten. Abmeldung jederzeit möglich.", submit: "Eintragen", errEmail: "Bitte gib eine gültige E-Mail-Adresse ein.", errCountry: "Bitte wähle ein Land.", errConsent: "Bitte bestätige den Erhalt der Start-E-Mails.", doneT: "Du bist auf der Liste!", doneC: "Wir melden uns, sobald Loqelo in {country} startet.", doneP: "Danke! Wir laden dich vor dem Start zu deinem Gründerprofil ein.", again: "Weitere E-Mail eintragen", days: "Tage", hours: "Std.", mins: "Min.", foot: "Services für Zuhause, Garten und Büro · Februar 2027", cookie: "Wir nutzen datenschutzfreundliche Statistik, um Besuche und Anmeldungen zu zählen. Deine E-Mail wird nie an die Statistik weitergegeben.", accept: "Statistik erlauben", decline: "Ablehnen", choose: "Land wählen" },
+  pl: { lang: "Język", navCta: "Dołącz do listy", badge: "Start w lutym 2027", h1: "Wszystko, czego potrzebuje <em>twoje miejsce.</em>", lead: "Opisz własnymi słowami, czego potrzebuje twój dom, ogród lub biuro. Loqelo rozpozna usługi, zweryfikowani wykonawcy wyślą oferty, a ty wybierzesz najlepszą.", ctaCustomer: "Potrzebuję usługi", ctaProvider: "Świadczę usługi", t1: "Bezpłatnie dla klientów", t2: "Zweryfikowani wykonawcy", t3: "Oferty w godzinach, nie dniach", login: "Zaloguj", appH: "Czego potrzebujesz? <b>Opisz to.</b>", appQ: "Czego potrzebujesz?", fc1: "średni czas do pierwszej oferty", fc2: "średnia ocena wykonawców", vEyebrow: "Zobacz w działaniu", vTitle: "Jedno zlecenie. Prawdziwe oferty. <em>Twój wybór.</em>", vSub: "Zobacz, jak Loqelo zamienia prosty opis w oferty wykonawców z twojej okolicy.", vNote: "Obejrzyj film Loqelo", sEyebrow: "Pierwsze spojrzenie", sTitle: "Proste dla klientów. <em>Przejrzyste dla wykonawców.</em>", sSub: "Podgląd aplikacji Loqelo, do której dostaniesz dostęp w dniu startu.", sh1: "Opisz to własnymi słowami", sp1: "Loqelo rozpoznaje potrzebne usługi, nawet kilka w jednym zdaniu.", sh2: "Porównaj prawdziwe oferty", sp2: "Najlepsze dopasowanie, najniższa cena lub najszybciej: oceny, terminy i wiadomość od każdego wykonawcy.", sh3: "Wykonawcy w pobliżu", sp3: "Zobacz na mapie, kto działa w twojej okolicy, i wybierz najlepszego.", hEyebrow: "Jak to działa", hTitle: "Od \"potrzebuję\" do <em>\"gotowe\"</em> w czterech krokach", s1t: "Opisz potrzebę", s1p: "Napisz, co trzeba zrobić, dodaj zdjęcia i wybierz termin.", s2t: "Dobieramy wykonawców", s2p: "Loqelo wysyła zlecenie do zweryfikowanych wykonawców z twojej okolicy.", s3t: "Porównaj oferty", s3p: "Ceny, oceny i dostępność obok siebie, a przed decyzją możesz napisać.", s4t: "Wybierz i odpocznij", s4p: "Wybierz najlepszą ofertę. Resztą zajmie się wykonawca.", a1: "Dom", a2: "Ogród", a3: "Budowa", a4: "Instalacje", a5: "Zwierzęta", a6: "Pojazdy", a7: "Usługi osobiste", a8: "Przeprowadzki i transport", wEyebrow: "Wczesny dostęp", wTitle: "Bądź pierwszy, gdy Loqelo wystartuje <em>w twoim kraju</em>", wSub: "Dołącz dziś. Klienci dostaną wczesny dostęp, wykonawcy darmowy profil założycielski.", tabCustomer: "Potrzebuję usług", tabProvider: "Świadczę usługi", fEmail: "Adres e-mail", fCountryC: "Kraj zamieszkania", fCountryP: "Kraj, w którym świadczysz usługi", fType: "Jestem (opcjonalnie)", individual: "Osobą prywatną", business: "Firmą", consent: "Zgadzam się na e-maile o starcie i nowościach Loqelo. Mogę zrezygnować w każdej chwili.", submit: "Dołącz do listy", errEmail: "Podaj poprawny adres e-mail.", errCountry: "Wybierz kraj.", errConsent: "Potwierdź zgodę na e-maile o starcie.", doneT: "Jesteś na liście!", doneC: "Napiszemy, gdy tylko Loqelo wystartuje w kraju: {country}.", doneP: "Dziękujemy! Przed startem zaprosimy cię do utworzenia profilu założycielskiego.", again: "Dodaj kolejny e-mail", days: "dni", hours: "godz.", mins: "min", foot: "Usługi dla domu, ogrodu i biura · luty 2027", cookie: "Używamy przyjaznej prywatności analityki do liczenia wizyt i zapisów. Twój e-mail nigdy nie trafia do analityki.", accept: "Akceptuj analitykę", decline: "Odrzuć", choose: "Wybierz kraj" },
+  cs: { lang: "Jazyk", navCta: "Přidat se na seznam", badge: "Spouštíme v únoru 2027", h1: "Vše, co vaše místo <em>potřebuje.</em>", lead: "Popište vlastními slovy, co potřebuje váš domov, zahrada nebo kancelář. Loqelo rozpozná služby, ověření poskytovatelé pošlou nabídky a vy vyberete tu nejlepší.", ctaCustomer: "Potřebuji službu", ctaProvider: "Nabízím služby", t1: "Zdarma pro zákazníky", t2: "Ověření poskytovatelé", t3: "Nabídky během hodin, ne dnů", login: "Přihlásit", appH: "Co potřebujete? <b>Popište to.</b>", appQ: "Co potřebujete?", fc1: "průměrná doba do první nabídky", fc2: "průměrné hodnocení poskytovatelů", vEyebrow: "Podívejte se", vTitle: "Jedna poptávka. Skutečné nabídky. <em>Vaše volba.</em>", vSub: "Podívejte se, jak Loqelo promění jednoduchý popis v nabídky poskytovatelů ve vašem okolí.", vNote: "Přehrát film Loqelo", sEyebrow: "První pohled", sTitle: "Jednoduché pro zákazníky. <em>Přehledné pro poskytovatele.</em>", sSub: "Ukázka aplikace Loqelo, ke které získáte přístup při spuštění.", sh1: "Popište to vlastními slovy", sp1: "Loqelo rozpozná potřebné služby, i několik v jedné větě.", sh2: "Porovnejte skutečné nabídky", sp2: "Nejlepší shoda, nejnižší cena nebo nejrychlejší: hodnocení, termíny a zpráva od každého poskytovatele.", sh3: "Poskytovatelé poblíž", sp3: "Na mapě uvidíte, kdo pracuje ve vašem okolí, a vyberete si.", hEyebrow: "Jak to funguje", hTitle: "Od \"potřebuji\" k <em>\"hotovo\"</em> ve čtyřech krocích", s1t: "Popište potřebu", s1p: "Napište, co je třeba udělat, přidejte fotky a zvolte termín.", s2t: "Najdeme poskytovatele", s2p: "Loqelo pošle poptávku ověřeným poskytovatelům ve vaší oblasti.", s3t: "Porovnejte nabídky", s3p: "Ceny, hodnocení a dostupnost vedle sebe, se zprávami před rozhodnutím.", s4t: "Vyberte a odpočívejte", s4p: "Zvolte nejlepší nabídku. Zbytek zařídí poskytovatel.", a1: "Domov", a2: "Zahrada", a3: "Stavebnictví", a4: "Instalace", a5: "Zvířata", a6: "Vozidla", a7: "Osobní služby", a8: "Stěhování a doprava", wEyebrow: "Předčasný přístup", wTitle: "Buďte první, až Loqelo spustí <em>ve vaší zemi</em>", wSub: "Přidejte se ještě dnes. Zákazníci získají předčasný přístup, poskytovatelé zakládající profil zdarma.", tabCustomer: "Potřebuji služby", tabProvider: "Nabízím služby", fEmail: "E-mailová adresa", fCountryC: "Země bydliště", fCountryP: "Země, kde poskytujete služby", fType: "Jsem (volitelné)", individual: "Fyzická osoba", business: "Firma", consent: "Souhlasím se zasíláním e-mailů o spuštění a novinkách Loqelo. Odhlásit se mohu kdykoli.", submit: "Přidat se", errEmail: "Zadejte platný e-mail.", errCountry: "Vyberte zemi.", errConsent: "Potvrďte souhlas se zasíláním e-mailů.", doneT: "Jste na seznamu!", doneC: "Ozveme se, jakmile Loqelo spustí v zemi {country}.", doneP: "Děkujeme! Před spuštěním vás pozveme k vytvoření zakládajícího profilu.", again: "Přidat další e-mail", days: "dní", hours: "hod.", mins: "min", foot: "Služby pro domov, zahradu a kancelář · únor 2027", cookie: "Používáme analytiku šetrnou k soukromí pro počítání návštěv a registrací. Váš e-mail se do analytiky nikdy nedostane.", accept: "Povolit analytiku", decline: "Odmítnout", choose: "Vyberte zemi" }
 };
-/* Hero demo: a request is typed, offers arrive, the best price is highlighted */
-const DEMO_OFFERS = {
-  garden: [["GM", "GreenMate", "4.9", "1.2", 85], ["TP", "TidyPlot", "4.8", "3.0", 92], ["LB", "Leaf&Blade", "4.7", "4.4", 79]],
-  home: [["AF", "AquaFix", "4.9", "0.8", 60], ["PP", "PipePro", "4.7", "2.1", 55], ["HH", "HandyHub", "4.8", "1.5", 68]],
-  office: [["CD", "CleanDesk", "4.8", "2.5", 140], ["ST", "SparkTeam", "4.9", "3.2", 155], ["NW", "NeatWorks", "4.6", "1.9", 129]]
-};
+
+/* Hero demo, modelled on the Loqelo app screens */
+const C = { green: "#2E9A77", blue: "#0677BA", amber: "#E8912C", teal: "#077E88" };
+const DEMO = [
+  { chips: [C.green, C.blue, C.amber], offers: [["CP", "CleanPro", "match", 340, 2, C.teal], ["GC", "Glans & Co", "price", 295, 3, C.green], ["FN", "Fresh Nest", "fast", 410, 1, C.blue]] },
+  { chips: [C.green, C.green], offers: [["GM", "GreenMate", "match", 120, 2, C.teal], ["TP", "TidyPlot", "price", 95, 4, C.green], ["LB", "Leaf & Blade", "fast", 140, 1, C.blue]] },
+  { chips: [C.blue], offers: [["CD", "CleanDesk", "match", 140, 2, C.teal], ["NW", "NeatWorks", "price", 129, 3, C.green], ["SP", "Sparkle Team", "fast", 155, 1, C.blue]] }
+];
 const DEMO_TEXT = {
-  en: { best: "Best price", s: [["garden", "Trim a 20 m hedge this week", "Hedge trimming"], ["home", "Fix a leaking kitchen tap", "Plumbing repair"], ["office", "Weekly cleaning, 120 m² office", "Office cleaning"]], label: "3 offers for \"{x}\"", wait: "Finding providers near you…" },
-  es: { best: "Mejor precio", s: [["garden", "Podar un seto de 20 m esta semana", "Podar el seto"], ["home", "Arreglar el grifo de la cocina", "Fontanería"], ["office", "Limpieza semanal, oficina de 120 m²", "Limpieza de oficina"]], label: "3 ofertas para \"{x}\"", wait: "Buscando profesionales cerca…" },
-  de: { best: "Bester Preis", s: [["garden", "20 m Hecke diese Woche schneiden", "Heckenschnitt"], ["home", "Tropfenden Küchenhahn reparieren", "Sanitär"], ["office", "Wöchentliche Reinigung, 120 m² Büro", "Büroreinigung"]], label: "3 Angebote für \"{x}\"", wait: "Anbieter in der Nähe werden gesucht…" },
-  pl: { best: "Najlepsza cena", s: [["garden", "Przyciąć 20 m żywopłotu w tym tygodniu", "Przycinanie żywopłotu"], ["home", "Naprawić cieknący kran w kuchni", "Hydraulika"], ["office", "Cotygodniowe sprzątanie, biuro 120 m²", "Sprzątanie biura"]], label: "3 oferty: \"{x}\"", wait: "Szukamy wykonawców w pobliżu…" },
-  cs: { best: "Nejlepší cena", s: [["garden", "Ostříhat 20 m živého plotu tento týden", "Stříhání živého plotu"], ["home", "Opravit kapající kuchyňský kohoutek", "Instalatérství"], ["office", "Týdenní úklid, kancelář 120 m²", "Úklid kanceláře"]], label: "3 nabídky: \"{x}\"", wait: "Hledáme poskytovatele poblíž…" }
+  en: { s: ["I need to clean my house, wash my windows and wash my car.", "Trim the hedge and mow the lawn this week.", "Weekly cleaning for our 120 m² office."], chips: [["Cleaning", "Window cleaning", "Car washing"], ["Hedge trimming", "Lawn mowing"], ["Office cleaning"]], found: "We found {n} services", found1: "We found 1 service", offers: "Offers", recv: "3 received", match: "Best match", price: "Lowest price", fast: "Fastest", days: "days", day: "day" },
+  es: { s: ["Necesito limpiar mi casa, lavar las ventanas y lavar el coche.", "Podar el seto y cortar el césped esta semana.", "Limpieza semanal de nuestra oficina de 120 m²."], chips: [["Limpieza", "Limpieza de ventanas", "Lavado de coche"], ["Poda de setos", "Corte de césped"], ["Limpieza de oficinas"]], found: "Encontramos {n} servicios", found1: "Encontramos 1 servicio", offers: "Ofertas", recv: "3 recibidas", match: "Mejor opción", price: "Precio más bajo", fast: "Más rápida", days: "días", day: "día" },
+  de: { s: ["Ich muss mein Haus putzen, die Fenster putzen und das Auto waschen.", "Hecke schneiden und Rasen mähen diese Woche.", "Wöchentliche Reinigung unseres 120 m² Büros."], chips: [["Reinigung", "Fensterreinigung", "Autowäsche"], ["Heckenschnitt", "Rasenmähen"], ["Büroreinigung"]], found: "{n} Services gefunden", found1: "1 Service gefunden", offers: "Angebote", recv: "3 erhalten", match: "Beste Wahl", price: "Günstigster Preis", fast: "Am schnellsten", days: "Tage", day: "Tag" },
+  pl: { s: ["Muszę posprzątać dom, umyć okna i umyć samochód.", "Przyciąć żywopłot i skosić trawnik w tym tygodniu.", "Cotygodniowe sprzątanie naszego biura 120 m²."], chips: [["Sprzątanie", "Mycie okien", "Mycie auta"], ["Przycinanie żywopłotu", "Koszenie trawnika"], ["Sprzątanie biur"]], found: "Znaleźliśmy {n} usługi", found1: "Znaleźliśmy 1 usługę", offers: "Oferty", recv: "3 otrzymane", match: "Najlepsze dopasowanie", price: "Najniższa cena", fast: "Najszybciej", days: "dni", day: "dzień" },
+  cs: { s: ["Potřebuji uklidit dům, umýt okna a umýt auto.", "Ostříhat živý plot a posekat trávník tento týden.", "Týdenní úklid naší kanceláře 120 m²."], chips: [["Úklid", "Mytí oken", "Mytí auta"], ["Stříhání plotu", "Sekání trávníku"], ["Úklid kanceláří"]], found: "Našli jsme {n} služby", found1: "Našli jsme 1 službu", offers: "Nabídky", recv: "3 přijaté", match: "Nejlepší shoda", price: "Nejnižší cena", fast: "Nejrychlejší", days: "dny", day: "den" }
 };
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const RECORDING = new URLSearchParams(location.search).has("rec"); // fixed timings for screen recordings
-let demoRun = 0;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-function offerHtml(o, cheapest) {
-  const [ini, name, rating, km, price] = o;
-  const esc = name.replace(/&/g, "&amp;");
-  return `<div class="offer${price === cheapest ? " is-cheapest" : ""}"><span class="tag">${DEMO_TEXT[lang].best}</span><span class="avatar">${ini}</span><span><strong>${esc}</strong>★ ${rating} · ${km} km</span><span class="price">€${price}</span></div>`;
-}
-
-function showScenarioStatic(i) {
-  const tx = DEMO_TEXT[lang] || DEMO_TEXT.en;
-  const [cat, q, short] = tx.s[i];
-  const offers = DEMO_OFFERS[cat];
-  const cheapest = Math.min(...offers.map((o) => o[4]));
-  document.querySelectorAll(".cat").forEach((c) => c.classList.toggle("on", c.dataset.cat === cat));
-  $("#demo-typed").textContent = q;
-  $("#demo-label").textContent = tx.label.replace("{x}", short);
-  $("#demo-offers").innerHTML = offers.map((o) => offerHtml(o, cheapest)).join("");
-  document.querySelectorAll("#demo-offers .offer").forEach((el) => { el.classList.add("in"); if (el.classList.contains("is-cheapest")) el.classList.add("best"); });
-}
-
-async function playDemo() {
-  const run = ++demoRun;
-  const alive = () => run === demoRun;
-  if (reduceMotion || new URLSearchParams(location.search).has("shot")) { showScenarioStatic(0); return; }
-  for (let i = 0; alive(); i = (i + 1) % 3) {
-    const tx = DEMO_TEXT[lang] || DEMO_TEXT.en;
-    const [cat, q, short] = tx.s[i];
-    const offers = DEMO_OFFERS[cat];
-    const cheapest = Math.min(...offers.map((o) => o[4]));
-    // clear previous
-    document.querySelectorAll("#demo-offers .offer").forEach((el) => el.classList.add("out"));
-    await sleep(400); if (!alive()) return;
-    $("#demo-offers").innerHTML = "";
-    $("#demo-label").textContent = "";
-    document.querySelectorAll(".cat").forEach((c) => c.classList.toggle("on", c.dataset.cat === cat));
-    // type the request
-    const search = $("#demo-search"), typed = $("#demo-typed");
-    search.classList.add("typing");
-    typed.textContent = "";
-    for (const ch of q) { typed.textContent += ch; await sleep(RECORDING ? 60 : 45 + Math.random() * 40); if (!alive()) return; }
-    await sleep(350); if (!alive()) return;
-    search.classList.remove("typing");
-    $("#demo-label").textContent = tx.wait;
-    await sleep(900); if (!alive()) return;
-    $("#demo-label").textContent = tx.label.replace("{x}", short);
-    $("#demo-offers").innerHTML = offers.map((o) => offerHtml(o, cheapest)).join("");
-    const els = [...document.querySelectorAll("#demo-offers .offer")];
-    for (const el of els) { await sleep(380); if (!alive()) return; el.classList.add("in"); }
-    await sleep(600); if (!alive()) return;
-    els.find((el) => el.classList.contains("is-cheapest"))?.classList.add("best");
-    await sleep(3200);
-  }
-}
-
-const LANG_NAMES ={ en: "English", es: "Español", de: "Deutsch", pl: "Polski", cs: "Čeština" };
+const LANG_NAMES = { en: "English", es: "Español", de: "Deutsch", pl: "Polski", cs: "Čeština" };
 const COUNTRIES = ["AT","BE","CH","CZ","DE","DK","ES","FI","FR","GB","HU","IE","IT","NL","NO","PL","PT","SE","SK","US","CA","MX","CO","AR","AU"];
 const LAUNCH = new Date("2027-02-01T09:00:00Z");
+const params = new URLSearchParams(location.search);
+const RECORDING = params.has("rec");   // fixed timings for screen recordings
+const STATIC = params.has("shot");     // static render for screenshots
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const $ = (s) => document.querySelector(s);
 const store = {
@@ -399,8 +402,11 @@ const store = {
 let lang = "en";
 let formType = "customer";
 const t = (k) => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
+const dt = () => DEMO_TEXT[lang] || DEMO_TEXT.en;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/* Detect language: saved choice, then browser language, then English */
+/* ---------- Language ---------- */
 function detectLang() {
   const saved = store.get("loqelo.lang");
   if (saved && I18N[saved]) return saved;
@@ -410,7 +416,6 @@ function detectLang() {
   }
   return "en";
 }
-
 function applyLang(code) {
   lang = code;
   document.documentElement.lang = code;
@@ -422,7 +427,6 @@ function applyLang(code) {
   playDemo();
   store.set("loqelo.lang", code);
 }
-
 function fillCountries() {
   const sel = $("#f-country");
   const current = sel.value;
@@ -436,45 +440,96 @@ function fillCountries() {
     if (guess && COUNTRIES.includes(guess.toUpperCase())) sel.value = guess.toUpperCase();
   }
 }
-
 function renderCountdown() {
   const ms = Math.max(0, LAUNCH - Date.now());
   const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
   $("#countdown").innerHTML = `<div><b>${d}</b><small>${t("days")}</small></div><div><b>${h}</b><small>${t("hours")}</small></div><div><b>${m}</b><small>${t("mins")}</small></div>`;
 }
 
+/* ---------- Hero demo ---------- */
+let demoRun = 0;
+function chipsHtml(i) {
+  return dt().chips[i].map((name, k) => `<span class="chip"><i style="background:${DEMO[i].chips[k]}"></i>${esc(name)}</span>`).join("");
+}
+function offersHtml(i) {
+  const x = dt();
+  return DEMO[i].offers.map(([ini, name, badge, price, days, color]) =>
+    `<div class="offer" data-badge="${badge}"><span class="av" style="background:${color}">${ini}</span><span><strong>${esc(name)}</strong><span class="tag ${badge}">${x[badge]}</span></span><span class="pr">€${price}<small>${days} ${days === 1 ? x.day : x.days}</small></span></div>`).join("");
+}
+function foundText(i) { const n = DEMO[i].chips.length; return n === 1 ? dt().found1 : dt().found.replace("{n}", n); }
+function showStatic(i) {
+  $("#demo-typed").textContent = dt().s[i];
+  $("#demo-found-t").textContent = "✓ " + foundText(i);
+  $("#demo-chips").innerHTML = chipsHtml(i);
+  $("#demo-found").classList.add("show");
+  document.querySelectorAll(".chip").forEach((c) => c.classList.add("in"));
+  $("#demo-qt").textContent = dt().offers; $("#demo-qs").textContent = dt().recv;
+  $("#demo-offers").innerHTML = offersHtml(i);
+  document.querySelectorAll(".offer").forEach((o) => { o.classList.add("in"); if (o.dataset.badge === "match") o.classList.add("best"); });
+}
+async function playDemo() {
+  const run = ++demoRun;
+  const alive = () => run === demoRun;
+  if (STATIC || reduceMotion) { showStatic(0); return; }
+  for (let i = 0; alive(); i = (i + 1) % DEMO.length) {
+    document.querySelectorAll(".offer").forEach((o) => o.classList.add("out"));
+    await sleep(400); if (!alive()) return;
+    $("#demo-offers").innerHTML = ""; $("#demo-qt").textContent = ""; $("#demo-qs").textContent = "";
+    $("#demo-found").classList.remove("show"); $("#demo-chips").innerHTML = "";
+    const typed = $("#demo-typed"); typed.textContent = "";
+    for (const ch of dt().s[i]) { typed.textContent += ch; await sleep(RECORDING ? 45 : 32 + Math.random() * 34); if (!alive()) return; }
+    await sleep(350); if (!alive()) return;
+    $("#demo-found-t").textContent = "✓ " + foundText(i);
+    $("#demo-chips").innerHTML = chipsHtml(i);
+    $("#demo-found").classList.add("show");
+    for (const c of document.querySelectorAll(".chip")) { await sleep(220); if (!alive()) return; c.classList.add("in"); }
+    await sleep(600); if (!alive()) return;
+    $("#demo-qt").textContent = dt().offers; $("#demo-qs").textContent = dt().recv;
+    $("#demo-offers").innerHTML = offersHtml(i);
+    for (const o of document.querySelectorAll(".offer")) { await sleep(360); if (!alive()) return; o.classList.add("in"); }
+    await sleep(500); if (!alive()) return;
+    document.querySelector('.offer[data-badge="match"]')?.classList.add("best");
+    await sleep(3400);
+  }
+}
+
+/* ---------- Video ---------- */
+$("#play").addEventListener("click", () => {
+  const v = $("#promo");
+  v.controls = true;
+  $("#play").hidden = true;
+  v.play().catch(() => {});
+  track("video_play");
+});
+
+/* ---------- Analytics (consent-based; GA4 via gtag in production) ---------- */
+function track(event, p = {}) {
+  if (store.get("loqelo.consent") !== "yes") return;
+  if (window.gtag) window.gtag("event", event, p);
+  else console.info("[analytics]", event, p);
+}
+
+/* ---------- Waitlist form ---------- */
 function setType(type) {
   formType = type;
   document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-selected", b.dataset.type === type));
   $("#country-label").textContent = t(type === "customer" ? "fCountryC" : "fCountryP");
 }
-
-/* ---------------- Analytics (consent-based) ----------------
-   In production this calls GA4 via gtag('event', ...). Only the
-   form type and country are sent, never the email address. */
-function track(event, params = {}) {
-  if (store.get("loqelo.consent") !== "yes") return;
-  if (window.gtag) window.gtag("event", event, params);
-  else console.info("[analytics]", event, params);
-}
-
-/* ---------------- Form ---------------- */
 $("#wl-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  const f = e.target;
-  const err = $("#f-err");
+  const f = e.target, err = $("#f-err");
   const show = (msg) => { err.textContent = msg; err.hidden = false; };
-  if (f.website.value) return; // honeypot: bots fill hidden fields
+  if (f.website.value) return; // honeypot
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(f.email.value.trim())) return show(t("errEmail"));
   if (!f.country.value) return show(t("errCountry"));
   if (!$("#f-consent").checked) return show(t("errConsent"));
   err.hidden = true;
   const payload = { type: formType, email: f.email.value.trim(), country: f.country.value, kind: f.kind.value || null, lang, consent: true, at: new Date().toISOString() };
-  // Production: POST payload to the mailing tool (e.g. Brevo / MailerLite list per type).
+  // Production: send payload to the mailing tool (Brevo / MailerLite, one list per type).
   console.info("[waitlist]", { ...payload, email: "(hidden)" });
   track("waitlist_signup", { form_type: formType, country: f.country.value });
   const countryName = f.country.options[f.country.selectedIndex].text;
-  $("#form-card").innerHTML = `<div class="done"><div class="big">🎉</div><h3>${t("doneT")}</h3><p>${formType === "customer" ? t("doneC").replace("{country}", countryName) : t("doneP")}</p><p style="margin-top:18px"><a href="#waitlist" onclick="location.reload()">${t("again")}</a></p></div>`;
+  $("#form-card").innerHTML = `<div class="done"><div class="big">✓</div><h3>${t("doneT")}</h3><p>${formType === "customer" ? t("doneC").replace("{country}", esc(countryName)) : t("doneP")}</p><p style="margin-top:18px"><a href="#waitlist" onclick="location.reload()">${t("again")}</a></p></div>`;
 });
 
 document.addEventListener("click", (e) => {
@@ -486,18 +541,23 @@ document.addEventListener("click", (e) => {
   if (c) { store.set("loqelo.consent", c.dataset.consent); $("#cookie").hidden = true; track("page_view_consented"); }
 });
 $("#f-email").addEventListener("focus", () => track("form_start", { form_type: formType }), { once: true });
-
 $("#lang").addEventListener("change", (e) => applyLang(e.target.value));
 window.addEventListener("scroll", () => $("#nav").classList.toggle("scrolled", scrollY > 8), { passive: true });
 
-/* ---------------- Init ---------------- */
+/* Reveal on scroll (everything visible immediately in static/reduced modes) */
+if (STATIC || reduceMotion || !("IntersectionObserver" in window)) document.querySelectorAll(".reveal").forEach((el) => el.classList.add("vis"));
+else {
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("vis"); io.unobserve(en.target); } }), { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+}
+
+/* ---------- Init ---------- */
 $("#lang").innerHTML = Object.entries(LANG_NAMES).map(([c, n]) => `<option value="${c}">${n}</option>`).join("");
-const initial = new URLSearchParams(location.search).get("lang");
-const start = I18N[initial] ? initial : detectLang();
+const start = I18N[params.get("lang")] ? params.get("lang") : detectLang();
 $("#lang").value = start;
 applyLang(start);
 setInterval(renderCountdown, 30000);
-if (!store.get("loqelo.consent") && !new URLSearchParams(location.search).has("shot") && !RECORDING) $("#cookie").hidden = false;
+if (!store.get("loqelo.consent") && !STATIC && !RECORDING) $("#cookie").hidden = false;
 </script>
 </body>
 </html>
